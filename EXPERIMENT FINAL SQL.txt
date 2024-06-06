@@ -1,0 +1,370 @@
+Experiment:- 01
+
+Write SQL queries for the following :
+
+a.	List the names and code of all employees
+SQL> select empno,ename from emp;
+
+b.	List the names, employee code and department code of all clerks.
+SQL> select ename, empno, dept_no from emp where job=’Clerk’;
+
+c.	List the names, employee code and salary of all managers.
+SQL> Select ename, empno, sal from emp where job=’Manager’;
+
+d.	List the names, employee code and hiredate of all analysts.
+SQL> select ename, empno, hiredate from emp where job=’Analysts’;
+
+e.	List the employees whose salary lies between 2000 and 3000.
+SQL> select ename, empno, sal from emp where sal between 2000 and 3000;
+
+f.	 List the employees whose salary less than 1000.
+SQL> select ename, empno, sal from emp where sal>1000;
+
+g.	List the employees whose salary greater than 4000.
+SQL> select ename, empno, sal from emp where sal>40000;
+
+h.	List the employees whose salaries are 800, 1600 or 2450
+SQL> select ename, empno, sal from emp where sal=800 or sal=1600 or sal=2450;
+
+i.	List the names of all employees who are either clerks or salesman or analysts. 
+SQL> select ename from emp where job=’Clerk’ or job= ‘Salesman’ or job=’Analysts’;
+
+j.	List the employee those who are not getting commission.
+SQL> select empno, ename from emp where comn is Null;
+
+k.	List the employee those who are getting commission.
+SQL> select empno, ename from emp where comm is not Null;
+
+l.	List the employee name starts with ‘C’.
+SQL> select ename from emp where ename like ‘C%’;
+
+
+EXPERIMENT :- 02
+     
+Write SQL queries for the following :
+
+(a)	List the names and job of all employees who have names exactly 5 characters in length.
+SQL> select ename, job from emp where length(ename)=5;
+
+
+(b)	List all employees whose names start with ‘G’.
+SQL> select * from emp where ename like ‘G%’;
+
+(c)	List all employees who name ends with  ‘n’
+SQL> select * from emp where ename like ‘%n’;
+
+(d)	List the names and job of all employees who have names exactly 5 characters in length and ends with ‘n’.
+SQL> select ename, job from emp where length(ename)=5 and ename like ‘%n’;
+
+(e)	List all employees who have not joined between 1/4/22 and 1/1/24.
+SQL> select ename, empno from emp where hiredate NOT Between ’01-JAN-2024’;
+
+(f)	List all employees whose job does not start will “Cl”.
+SQL> select ename from emp where job not like ‘CI%’;
+
+(g)	List all managers who earn more than Rs. 40000/-.
+SQL> select empno, ename from emp where job=’Manager’ and sal>40000;
+
+(h)	List all clerks and salesman who earn more than Rs. 1600/-
+SQL> select empno, ename, job, sal from emp where job=’Clerk’ and sal>1600 union select empno, ename, job, sal from emp where job=’Salesman’ and sal>1600;
+
+(i)	List the names and salaries of all employees who were joined as manager during 2024.
+SQL> select ename, sal from emp where job=’Manager’ and hiredate between ’31-DEC-2023’ AND ’01-JAN-2025’;
+
+
+EXPERIMENT - 3
+
+a)	Calculate the average salary of all employees.
+SQL> select avg(sal) as Average_salary from emp;
+
+b)	Calculate the average salary of all Managers.
+SQL> select avg(sal) as Average_salary from empl where job='MANAGER';
+
+c)	Calculate the total salary of all employees.
+SQL> select sum(sal) as TOTAL_salary from emp1;
+
+d)	Calculate the total salary of all managers.
+SQL> select sum(sal) as Total_salary from empl where job='MANAGER';
+
+e)	Find the minimum salaries earned by the employees.
+SQL> select min(sal) from emp1;
+
+f)	Find the maximum salaries earned by the employees.
+SQL> select max(sal) from emp1;
+g)	Find the minimum salaries earned by a clerks.
+SQL> select min(sal) from empl where job='CLERK';
+
+h)	Find the maximum salaries earned by a salesman.
+SQL> select mAX(sal) from empl where job='SALESMAN';
+
+i)	Find the minimum and maximum and average salaries earned by a employees.
+SQL> select MAX(SAL), MIN(SAL), AVG(SAL) from emp1;
+
+j)	Find the minimum and maximum and average salaries earned by a clerks.
+SQL> select MAX(SAL), MIN(SAL), AVG(SAL) from emp1 WHERE JOB='CLERK';
+
+k)	List the total number of employees and the average salaries of the different departments.
+SQL> SELECT COUNT(*), AVG(SAL), DEPTNO, JOB FROM EMP1 GROUP BY DEPTNO, JOB;
+
+l)	Calculate total number of employees.
+SQL> SELECT COUNT(*) AS TOTAL_EMPLOYEE FROM EMP1;
+
+m)	Calculate total number of managers.
+SQL> SELECT COUNT(*) AS TOTAL_MANAGER FROM EMP1 WHERE JOB='MANAGER';
+
+n)	Calculate the number of employees who are not getting any commission.
+SQL> SELECT COUNT(*) FROM EMP1 WHERE COMM IS NULL;
+
+o)	Calculate the number of employees who are getting any commission.
+SQL> SELECT COUNT(*) AS TOTAL_EMPLOYEES_WITHCOMM FROM EMP1 WHERE COMM IS NOT NULL;
+
+p)	List the details of all managers in ascending order of joining dates.
+SQL> SELECT * FROM EMP1 WHERE JOB='MANAGER' ORDER BY HIREDATE ASC;
+
+q)	List the average salaries for each different job.
+SQL> SELECT JOB, AVG(SAL) FROM EMP1 GROUP BY JOB;
+
+r)	Display the minimum, maximum, and average salaries for each job group.
+SQL> SELECT JOB, MIN(SAL), MAX(SAL), AVG(SAL) FROM EMP1 GROUP BY JOB;
+
+s)	Find all departments which have less than 3 employees.
+SQL> SELECT DNAME FROM DEPT WHERE DEPTNO IN (SELECT DEPTNO FROM EMPI GROUP BY DEPTNO HAVING COUNT(*)<3);
+
+t)	List the details of the employees in ascending order of department number, and within each department, in descending order of salary.
+SQL> SELECT * FROM EMP1 ORDER BY DEPTNO ASC, SAL DESC;
+
+
+u)	Display the name, deptno and annual salary of each employee in order salary and deptno.
+SQL> SELECT ENAME, DEPTNO, SAL*12 AS "ANNUAL_SALARY" FROM EMP1 ORDER BY SAL, DEPTNO;
+
+EXPERIMENT- 4
+
+a)	List all employee names, dept name and the city, in department name order.
+SQL>select emp2.ename,dept.dname,dept.loc from emp2 join dept on emp2.deptno=dept.deptno order by dept.dname;
+
+b)	List all employee name, dept number, dept name and salary
+SQL>select emp2.ename,emp2.deptno,dept.dname,emp2.sal from emp2 join dept on emp2.deptno=dept.deptno;
+
+c)	List all employees working in Dallas in descending order of salary.
+SQL>select * from emp2 join dept on  emp2.deptno=dept.deptno where loc='Dallas' order by sal desc;
+
+d)	 List all employee’s name, job, salary and department name for everyone in the company except clerks. Sort the report with respect to job and salary
+SQL> select emp2.ename,emp2.job,emp2.sal,dept.dname from emp2 join dept on emp2.deptno=dept.deptno where emp2.job<>'clerk' order by emp2.job,emp2.sal;
+
+e)	 List all employee names who work in the same city as an employee named ‘FORD’.
+SQL> select emp2.ename from emp2 join dept on emp2.deptno=dept.deptno where dept.loc =(select loc from emp2 where ename='FORD');
+
+f)	Display the name of the dept that has no employee.
+SQL>select dname from dept where deptno not in(select deptno from emp2 );
+
+
+
+
+Experiment :- 05
+
+a.	List the employees belonging to the department 20.
+SQL>SELECT emp1.ename emp1.sal FROM emp1 INNER JOIN dept ON emp1.Deptno = dept. Deptno WHERE dept. Deptno = 20;
+
+b.	List the name and salary of the employees whose salary is more than 1000.
+SQL>select ename, sal from empl where sal>1000;
+
+c.	List the employee number and the name of the manager.
+SQL>select empno, ename from empl where job='MANAGER';
+
+d.	List the names of the clerks working in the department 20.
+SQL>SELECT ename from empl inner join dept on emp1.deptno=dept.deptno where job='CLERK'and dept.deptno=20;
+
+e.	List the name of the analysts and salesman.
+SQL>select ename from empl where job='ANALYST' OR JOB='SALESMAN';
+
+f.	List the details of the employees who have joined before the end of September 81.
+SQL>select * from emp1 where hiredate<'01-oct-1981';
+
+g.	List the names of the employees who are not managers.
+SQL>select * from emp1 where job<>'MANAGER';
+
+h.	List the name of the employees whose employee numbers 7369,7521,7839,7934,7788.
+SQL>select empno, ename from emp1 where empno in(7369, 7521, 7839, 7934, 7788);
+
+i.	List the employee details not belonging to the department 10,30 and 40.
+SQL>select empno, ename from empl join dept on empl.deptno=dept.deptno where empl.deptno not in(10,30,40);
+
+j.	List the employee names who have joined before 30th June’81 and after December ’81.
+SQL>select ename hiredate from empl where hiredate<'30-JUN-1981' or hiredate>'31-dec-1981';
+
+k.	List the name of the employee and designation (job) of the employee who does not report to anybody (who doesn’t have manager).
+SQL>select ename,job from empl where mgr is null;
+
+l.	List the different jobs (designations) available in the emp table.
+SQL>SELECT DISTINCT job FROM emp1;
+
+m.	List the employees not assigned to any department.
+SQL>select ename from empl where deptno is null;
+
+n.	List the details of the employees whose salary is greater than 2000 and not eligible for commission.
+SQL>select ename, sal from emp1 where sal>2000 and comm is null;
+
+o.	List the employee names having ‘I’ as the second character.
+SQL>SELECT ename FROM emp1 WHERE SUBSTR(ename, 2, 1) = '1';
+
+p.	List the name, salary and PF amount of all the employees (PF is calculated as 10% of salary).
+SQL>select ename, sal, sal*0.10 as PF_AMOUNT from emp1;
+
+q.	List the employee number, name and salary in ascending order of salary.
+SQL>select empno, ename, sal from emp1 order by sal asc;
+
+r.	Lists the employee name and hiredate in descending order of hiredate.
+SQL>select ename, hiredate from empl order by hiredate desc;
+
+s.	List the employee name, salary, PF, HRA, DA and gross salary;order the result in ascending order of gross.HRA is 50% of salary and DA is 30% of salary.
+SQL>select ename, sal, sal*0.10 as PF,sal*0.50 as hra, sal*0.30 as DA, (sal*0.18)+(sal*0.50)+(sal*0.30)+sal as gross_salary FROM Empl order by gross _salary asc;
+
+t.	List the department number and the total salary payable in each department. List the jobs and number of employees in each job.The result should be in descending order of the number of employees.
+SQL>SELECT d.deptno, SUM(e.sal) AS total salary FROM emp1 e JOIN dept d ON e.deptno = d.deptno GROUP BY d.deptno ORDER BY total_salary DESC;
+
+u.	List the total salary, maximum, minimum and average salary of the employee’s job wise.
+SQL>SELECT JOB, SUM(SAL) AS TotalSalary, MAX(SAL) AS MaxSalary, MIN(SAL) AS MinSalary, AVG(SAL) AS AvgSalary FROM emp1 GROUP BY JOB;
+
+v.	List the average salary from each job excluding manager.
+SQL>SELECT JOB, AVG(SAL) AS AverageSalary FROM emp1 WHERE JOB <> 'MANAGER' GROUP BY JOB ORDER BY AverageSalary;
+
+w.	List the average monthly salary for each job type within department.
+SQL>SELECT DEPTNO, job, AVG(sal) AS average_monthly_salary FROM emp1 GROUP BY DEPTNO, job;
+x.	List average salary for all departments employing more than five people.
+SQL>SELECT DEPTNO, AVG(SAL) AS Average Salary FROM EMP1 GROUP BY DEPTNO HAVING COUNT(EMPNO) > 5;
+
+y.	List job of all the employees where maximum salary is greater than or equal to 3000.
+SQL>SELECT DISTINCT JOB FROM EMP1 WHERE SAL>=3000;
+
+z.	List the total salary, maximum and minimum salary and the average salary of employees job wise for department number 20 and display only those rows having average salary greater than 1000.
+SQL>SELECT JOB, SUM(SAL) AS TotalSalary, MAX(SAL) AS MaxSalary, MIN(SAL) AS MinSalary, AVG(SAL) AS AvgSalary FROM emp1 WHERE DEPTNO=20 GROUP BY JOB HAVING AVG(SAL)>1000;
+
+
+
+Experiment no.- 6
+
+a)	List the employees earns more than any employee in CHICAGO.
+SQL>SELECT FROM emp1 e1 WHERE e1.sal (SELECT MAX(e2.sal) FROM emp1 e2 INNER JOIN dept d ON e2.deptno = d.deptno WHERE d.loc = 'CHICAGO');
+
+
+
+b)	List the name of the  employee who works in the same department as SMITH.
+SQL>SELECT ename, deptno FROM emp1 WHERE deptno = (SELECT deptno FROM emp1 WHERE ename = 'SMITH');
+
+c)	List the name, employee number ,their manager name and manager number.
+SQL>SELECT e1.ename AS EName, e1.empno AS Empno, e2.ename AS  ManagerName, e1.mgr AS ManagerNumber FROM emp1 e1 LEFT JOIN emp1 e2 ON e1.mgr = e2.empno;
+
+d)	List the name of the employee  job is same as  ‘CLARK’.
+SQL>SELECT ename, job FROM emp1 WHERE job = (SELECT job FROM emp1 WHERE ename = 'CLARK');
+
+e)	List the name of employee whose salary is more than ‘TURNER’.
+SQL>SELECT ename, sal FROM emp1 WHERE sal>(SELECT sal FROM emp1 WHERE ename = 'TURNER');
+
+f)	List the name of employee who joined after ‘ALLEN’.
+SQL>SELECT ename, hiredate FROM emp1 WHERE hiredate>(SELECT hiredate FROM emp1 WHERE ename = 'ALLEN');
+
+g)	Display the name of the department whose job is ‘SALESMAN’.
+SQL>SELECT DISTINCT d.dname AS Department Name FROM empl e INNER JOIN dept d ON e.deptno = d.deptno WHERE e.job = 'SALESMAN';
+
+h)	Display the name of the department in which ‘FORD’ works.
+SQL>SELECT DISTINCT d.dname AS Department Name FROM emp1 e INNER JOIN dept d ON e.deptno = d.deptno WHERE e.ename = 'FORD';
+
+
+i)	Display the name of the department whose salary is maximum.
+SQL>SELECT DISTINCT d.dname AS DepartmentName, sal FROM emp1 e INNER JOIN dept d ON e.deptno = d.deptno WHERE sal = (select max(sal) from emp1);
+
+j)	Display the name of the city(location) in which ‘SMITH’ works.
+SQL>SELECT d.loc AS City FROM emp1 e INNER JOIN dept d ON e.deptno = d.deptno WHERE e.ename = 'SMITH';
+
+k)	Display the name of the city in which the manager works.
+SQL>SELECT distinct d.loc AS City FROM emp1 e INNER JOIN dept d ON e.mgr= d.deptno;
+
+l)	Display the grade of the employee named ‘MARTIN’.
+//
+
+
+m)	List the employees earns more than every employee in  ‘DALLAS’.
+SQL>SELECT e.ename AS Employeename,e.sal FROM emp1 e WHERE e.sal > ALL (SELECT sal FROM emp1 WHERE deptno = (SELECT d eptno FROM dept WHERE loc = 'DALLAS'));
+
+n)	Display the name of the department which has no employee.
+SQL>SELECT d.dname AS Department Name FROM dept d WHERE d.deptno NOT IN (SELECT deptno FROM emp1);
+
+
+
+
+o)	List name, employee number and the name, employee number of their  managers’ manager .
+SQL>SELECT e1.ename AS EmployeeName, e1.empno AS EmployeeNumber, e2.ename AS ManagerName, e2.empno AS ManagerNumber FROM emp1 e1 INNER JOIN emp1 e2 ON e1.mgr = e2.empno INNER JOIN emp1 e3 ON e2.mgr = e3.empno;
+
+
+p)	list the name of the employee who joined in the same year of  ‘ADAMS’.
+SQL>SELECT el.ename AS EmployeeName, hiredate FROM empl e1 WHERE EXTRACT(YEAR FROM el.hiredate) = (SELECT EXTRACT(YEAR FROM e2.hiredate) FROM empl e2 WHERE e2.ename = 'ADAMS');
+
+q)	list the name of the employee who joined in the same month of  ‘BLAKE’.
+SQL>SELECT e1.ename AS EmployeeName, hiredate FROM emp1 e1 WHERE EXTRACT (month FROM e1.hiredate) = (SELECT EXTRACT(month FROM e2.hiredate) FROM emp1 e2 WHERE e2.ename 'BLAKE');
+
+
+r)	list the name of the employee who joined in the same date of  ‘ADAMS’.
+SQL>SELECT e1.ename AS EmployeeName, Hiredate FROM emp1 e1 WHERE EXTRACT(YEAR FROM e1.hiredate) = (SELECT EXTRACT(YEAR FROM e2.hiredate) FROM emp1 e2 WHERE e2.ename = 'ADAMS') AND EXTRACT(MONTH FROM e1.hiredate) = (SELECT EXTRACT(MONTH FROM e2.hiredate) FROM emp1 e2 WHERE e2.ename = 'ADAMS') AND EXTRACT (DAY FROM e1.hiredate) = (SELECT EXTRACT(DAY FROM e2.hiredate) FROM emp1 e2 WHERE e2.ename = 'ADAMS');
+
+s)	List the name of the department who gets commission.
+SQL>SELECT DISTINCT d.dname FROM dept d WHERE d.deptno IN (SELECT DISTINCT e.deptno FROM emp1 e WHERE e.mgr is not null);
+
+
+EXPERIMENT-7
+
+Write  SQL queries for the following :
+
+(a)List all employee who work in Dallas or have joined the company as manager before 82.
+SQL> SELECT e.ename,e.hiredate,e.mgr FROM emp1 e join dept d on e.deptno=d.deptno WHERE d.loc = 'Dallas' OR (e.hireDate < '01-JAN-1982' AND e.mgr IS
+ NOT NULL);
+
+
+
+(b)List all employees who work in Boston and earn more than any employee working in Chicago.
+SQL> select e1.empno , e1.ename from emp1 e1 JOIN dept e2 ON e1.deptno = e2.deptno WHERE e1.SAL > (select sal from emp1 where  e2.LOC = 'BOSTON' AND e2.LOC = 'CHICAGO');
+
+OR 
+
+SQL>SELECT e.ename, e.sal FROM emp1 e INNER JOIN dept d ON e.deptno = d.deptno WHERE d.loc = 'BOSTON' AND e.sal > (SELECT MAX(sal) FROM emp1 WHERE deptno IN (SELECT deptno FROM dept WHERE loc= 'CHICAGO'));
+
+(c)List name of the employee who earns the minimum salary.
+SQL>select empno ,ename ,sal from emp1 where sal=(select min(sal) from emp1);
+
+(d)List all employees who work in the same post as Smith.
+SQL>select empno, ename, job from emp1 where job=(select job from emp1 where ename='SMITH');
+
+(e)List all employees who earn the lowest salary in their respective dept.
+SQL> select e.empno ,e.ename , e.sal ,e.deptno from emp1 e inner join dept d on e.deptno=d.deptno where e.sal =(select min(sal) from emp1 where dept
+no=e.deptno);
+
+
+(f)List all employees who earn more than every employee in the ‘Sales’ department.
+SQL>select e1.empno , e1.ename ,e1.sal from emp1 e1 where sal>ALL (select e2.sal from emp1 e2 where deptno =(select deptno from dept where dname='SALES'));
+
+
+(g)Find the job with the highest average salary.
+    SQL>select job ,avg(sal) from emp1 where job<>'PRESIDENT' group by job order by avg(sal) desc;
+
+
+EXPERIMENT :- 08 
+
+a.  List the name , job , and salary of employees  whose salaries is greater than the higheast salary in operation department .
+SQL>  select ename,job,sal from emp1 e join dept d on e.deptno=d.deptno and sal>(select max(sal) from emp1 e1,dept d1 where e1.deptno=d1.deptno and e
+name='OPERATIONS');
+
+b. Find the department is not having any employee.
+SQL >SELECT d.deptno, d.dname FROM dept d LEFT JOIN emp1 e ON d.deptno = e.deptno WHERE e.deptno IS NULL;
+
+C. List the top 10 earner in the company.
+SQL >  SELECT deptno, ename, sal FROM ( SELECT deptno, ename, sal, ROW_NUMBER() OVER (ORDER BY sal DESC) AS rank FROM emp1 )WHERE rank <=10;
+
+D. List the top 2 earner in each department .
+     SQL> SELECT deptno, ename, sal FROM ( SELECT deptno, ename, sal, ROW_NUMBER() OVER (PARTITION BY deptno ORDER BY sal DESC) AS rank FROM emp1 )WHERE
+rank <=2;
+
+e.  List the Years and the number of people joining in that year.
+SQL >SELECT extract(YEAR from hiredate)AS Join_Year, COUNT(*) AS Joined_Employees FROM emp1 GROUP BY extract(year from hiredate) ORDER BY Join_Year;
+
+f. Give an increment of 20% to all employees who have joined before 01/01/1982 or earns less than Rs. 3000 .
+SQL> UPDATE emp1 SET sal = sal * 1.2 WHERE hiredate < '01-JAN-1982' OR sal < 3000;
+
